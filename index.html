@@ -163,7 +163,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/01/19/ScutMetaU/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/01/19/ScutMetaU/" class="post-title-link" itemprop="url">SCUT MetaUniverse(元宇宙虚拟交互平台搭建简易教学)</a>
         </h2>
 
         <div class="post-meta">
@@ -174,7 +174,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2026-01-19 14:11:22 / Modified: 14:14:04" itemprop="dateCreated datePublished" datetime="2026-01-19T14:11:22+08:00">2026-01-19</time>
+              <time title="Created: 2026-01-19 14:11:22 / Modified: 14:26:29" itemprop="dateCreated datePublished" datetime="2026-01-19T14:11:22+08:00">2026-01-19</time>
             </span>
 
           
@@ -188,77 +188,413 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
-<h2 id="title-SCUT-MetaUniverse-华工元宇宙虚拟交互平台搭建简易教学"><a href="#title-SCUT-MetaUniverse-华工元宇宙虚拟交互平台搭建简易教学" class="headerlink" title="title:SCUT MetaUniverse(华工元宇宙虚拟交互平台搭建简易教学)"></a>title:SCUT MetaUniverse(华工元宇宙虚拟交互平台搭建简易教学)</h2>
-      
-    </div>
+          <h1 id="SCUT-MetaUniverse-元宇宙虚拟交互平台搭建简易教学"><a href="#SCUT-MetaUniverse-元宇宙虚拟交互平台搭建简易教学" class="headerlink" title="SCUT MetaUniverse - 元宇宙虚拟交互平台搭建简易教学"></a>SCUT MetaUniverse - 元宇宙虚拟交互平台搭建简易教学</h1><p>本文档将详细介绍如何从零开始构建一个完整的元宇宙虚拟交互平台。无论您想复现校园场景还是其他场景，都可以按照以下技术链流程进行操作。</p>
+<h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h3 id="1-1-硬件要求"><a href="#1-1-硬件要求" class="headerlink" title="1.1 硬件要求"></a>1.1 硬件要求</h3><ul>
+<li><strong>操作系统：</strong> Windows 10&#x2F;11（支持 DirectX 12）</li>
+<li><strong>显卡：</strong> NVIDIA RTX 系列（推荐 RTX 3060 及以上，支持实时光线追踪）</li>
+<li><strong>内存：</strong> 16GB 及以上</li>
+<li><strong>存储：</strong> 至少 100GB 可用空间（用于存放引擎、项目文件和资源）</li>
+</ul>
+<h3 id="1-2-软件安装"><a href="#1-2-软件安装" class="headerlink" title="1.2 软件安装"></a>1.2 软件安装</h3><p>按以下顺序安装必要软件：</p>
+<ol>
+<li><p><strong>Visual Studio 2022（要求下载17.4以往的版本，防止版本兼容冲突问题）</strong></p>
+<ul>
+<li>安装时勾选”使用 C++ 的游戏开发”工作负载</li>
+<li>确保包含 Windows SDK 和 .NET Framework</li>
+</ul>
+</li>
+<li><p><strong>Unreal Engine 5.2（适用于安装luma ai插件）</strong></p>
+<ul>
+<li>从 Epic Games Launcher 下载安装</li>
+<li>创建账号并关联许可证</li>
+</ul>
+</li>
+<li><p><strong>Git（可选，但是建议）</strong></p>
+<ul>
+<li>用于版本控制和团队协作</li>
+</ul>
+</li>
+<li><p><strong>3D 建模软件（可选）</strong></p>
+<ul>
+<li>Blender（免费）或 Maya（用于创建自定义资产）</li>
+</ul>
+</li>
+</ol>
+<h3 id="1-3-项目初始化"><a href="#1-3-项目初始化" class="headerlink" title="1.3 项目初始化"></a>1.3 项目初始化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 UE5.2 中创建新项目</span></span><br><span class="line"><span class="comment"># 选择 C++ 项目模板</span></span><br><span class="line"><span class="comment"># 启用以下插件：</span></span><br><span class="line"><span class="comment"># - Enhanced Input</span></span><br><span class="line"><span class="comment"># - UMG（UI 系统）</span></span><br><span class="line"><span class="comment"># - Animation Blueprint</span></span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<h2 id="二、场景数据采集"><a href="#二、场景数据采集" class="headerlink" title="二、场景数据采集"></a>二、场景数据采集</h2><h3 id="2-1-室外场景采集"><a href="#2-1-室外场景采集" class="headerlink" title="2.1 室外场景采集"></a>2.1 室外场景采集</h3><p><strong>工具：</strong> DJI 无人机（或其他支持多角度拍摄的设备）</p>
+<p><strong>步骤：</strong></p>
+<ol>
+<li>规划飞行路线，确保覆盖目标区域</li>
+<li>多角度拍摄（建议至少 50-100 张不同角度的照片）</li>
+<li>保持照片重叠度在 60% 以上</li>
+<li>确保光线充足，避免逆光拍摄</li>
+<li>导出照片为 JPG 或 PNG 格式</li>
+</ol>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>拍摄时保持相机参数一致</li>
+<li>避免运动模糊</li>
+<li>包含足够的特征点便于匹配</li>
+</ul>
+<h3 id="2-2-室内场景采集"><a href="#2-2-室内场景采集" class="headerlink" title="2.2 室内场景采集"></a>2.2 室内场景采集</h3><p><strong>工具：</strong> iPhone（或其他支持 4K 视频录制的设备）</p>
+<p><strong>步骤：</strong></p>
+<ol>
+<li>在目标室内空间缓慢移动录制视频</li>
+<li>保持相机稳定，避免快速移动</li>
+<li>确保光线充足</li>
+<li>录制时长建议 2-5 分钟</li>
+<li>导出为 MP4 格式（1080p 或更高）</li>
+</ol>
+<p><strong>替代方案：</strong></p>
+<ul>
+<li>如果只有照片，也可以使用多角度照片进行重建</li>
+</ul>
+<h2 id="三、场景重建"><a href="#三、场景重建" class="headerlink" title="三、场景重建"></a>三、场景重建</h2><h3 id="3-1-室外场景重建（RealityCapture）"><a href="#3-1-室外场景重建（RealityCapture）" class="headerlink" title="3.1 室外场景重建（RealityCapture）"></a>3.1 室外场景重建（RealityCapture）</h3><p><strong>软件：</strong> RealityCapture（或 Agisoft Metashape）</p>
+<p><strong>流程：</strong></p>
+<ol>
+<li><p><strong>导入照片</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">打开 RealityCapture → File → Add Photos</span><br><span class="line">选择所有室外场景照片</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>对齐照片</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Workflow → Align Images</span><br><span class="line">等待自动匹配和相机位置计算</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>生成密集点云</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Workflow → Calculate Dense Cloud</span><br><span class="line">选择 High 质量设置</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>生成网格模型</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Workflow → Calculate Mesh</span><br><span class="line">选择 High 质量，启用纹理映射</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>导出模型</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File → Export Model</span><br><span class="line">格式选择：FBX（用于大规模场景）</span><br><span class="line">坐标系：选择与 UE 兼容的坐标系</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>优化建议：</strong></p>
+<ul>
+<li>如果模型过大，可以先进行简化处理</li>
+<li>检查并修复模型中的孔洞和错误面</li>
+</ul>
+<h3 id="3-2-室内场景重建（Nerv-算法-Luma-AI）"><a href="#3-2-室内场景重建（Nerv-算法-Luma-AI）" class="headerlink" title="3.2 室内场景重建（Nerv 算法 &#x2F; Luma AI）"></a>3.2 室内场景重建（Nerv 算法 &#x2F; Luma AI）</h3><p><strong>方案一：使用 Luma AI（推荐，简单）</strong></p>
+<ol>
+<li>访问 Luma AI 网站或使用 UE 插件</li>
+<li>上传室内视频或照片</li>
+<li>等待云端处理完成</li>
+<li>下载生成的 3D 模型（PLY 格式）</li>
+</ol>
+<p><strong>方案二：使用 Nerv 算法（本地处理）</strong></p>
+<ol>
+<li><p>提取视频关键帧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 OpenCV 提取关键帧</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 每隔 N 帧提取一帧，或基于场景变化检测</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 Nerv 算法进行神经辐射场重建</p>
+</li>
+<li><p>转换为网格模型</p>
+</li>
+<li><p>导出为 PLY 格式</p>
+</li>
+</ol>
+<p><strong>格式说明：</strong></p>
+<ul>
+<li><strong>FBX：</strong> 用于大规模室外场景，包含完整的材质和纹理信息</li>
+<li><strong>PLY：</strong> 用于室内环境，文件较小，适合细节丰富的场景</li>
+</ul>
+<h2 id="四、场景导入与优化"><a href="#四、场景导入与优化" class="headerlink" title="四、场景导入与优化"></a>四、场景导入与优化</h2><h3 id="4-1-导入到-Unreal-Engine"><a href="#4-1-导入到-Unreal-Engine" class="headerlink" title="4.1 导入到 Unreal Engine"></a>4.1 导入到 Unreal Engine</h3><p><strong>步骤：</strong></p>
+<ol>
+<li><p><strong>创建项目结构</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Content/</span><br><span class="line">├── Maps/          # 地图文件</span><br><span class="line">├── Meshes/        # 导入的模型</span><br><span class="line">├── Materials/     # 材质文件</span><br><span class="line">├── Textures/      # 纹理文件</span><br><span class="line">└── Blueprints/    # 蓝图文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>导入模型</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">右键 Content Browser → Import</span><br><span class="line">选择 FBX 或 PLY 文件</span><br><span class="line">导入设置：</span><br><span class="line">- 勾选 Import Materials</span><br><span class="line">- 设置合适的缩放比例</span><br><span class="line">- 检查坐标系是否正确</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>坐标转换</strong></p>
+<ul>
+<li>如果坐标系不匹配，需要在 C++ 中编写坐标转换函数</li>
+<li>确保模型位置正确对齐</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-2-材质与光照优化"><a href="#4-2-材质与光照优化" class="headerlink" title="4.2 材质与光照优化"></a>4.2 材质与光照优化</h3><p><strong>材质调整：</strong></p>
+<ol>
+<li>创建材质实例</li>
+<li>调整基础颜色、粗糙度、金属度等参数</li>
+<li>添加法线贴图增强细节</li>
+<li>使用 UE5 的 Nanite 虚拟化几何体（如果支持）</li>
+</ol>
+<p><strong>光照设置：</strong></p>
+<ol>
+<li><p><strong>室外场景：</strong></p>
+<ul>
+<li>使用 Directional Light（太阳光）</li>
+<li>启用实时光线追踪（如果硬件支持）</li>
+<li>调整 Sky Light 模拟天空光照</li>
+<li>使用 Sky Atmosphere 组件增强真实感</li>
+</ul>
+</li>
+<li><p><strong>室内场景：</strong></p>
+<ul>
+<li>添加 Point Light 或 Spot Light</li>
+<li>使用 Lightmass 进行烘焙（静态光照）</li>
+<li>调整光照强度和颜色温度</li>
+</ul>
+</li>
+<li><p><strong>动态光照：</strong></p>
+<ul>
+<li>使用 Luma AI 技术或 UE 内置的 Time of Day 系统</li>
+<li>实现不同时间段的光照变化</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-3-性能优化"><a href="#4-3-性能优化" class="headerlink" title="4.3 性能优化"></a>4.3 性能优化</h3><p><strong>LOD（细节层次）设置：</strong></p>
+<ol>
+<li>为远距离建筑和植被创建 LOD</li>
+<li>使用 UE 的自动 LOD 生成工具</li>
+<li>设置合适的 LOD 距离阈值</li>
+</ol>
+<p><strong>其他优化：</strong></p>
+<ul>
+<li>使用 Occlusion Culling（遮挡剔除）</li>
+<li>启用 Frustum Culling（视锥剔除）</li>
+<li>优化纹理大小（使用压缩格式）</li>
+<li>合并静态网格体减少 Draw Call</li>
+</ul>
+<p><strong>目标性能：</strong></p>
+<ul>
+<li>保持 60 FPS 或更高的帧率</li>
+<li>在复杂场景中也要保持流畅</li>
+</ul>
+<h2 id="五、交互系统开发"><a href="#五、交互系统开发" class="headerlink" title="五、交互系统开发"></a>五、交互系统开发</h2><h3 id="5-1-角色控制系统"><a href="#5-1-角色控制系统" class="headerlink" title="5.1 角色控制系统"></a>5.1 角色控制系统</h3><p><strong>C++ 基础类：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CharacterController.h</span></span><br><span class="line"><span class="built_in">UCLASS</span>()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">YOURPROJECT_API</span> AYourCharacter : <span class="keyword">public</span> ACharacter</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">GENERATED_BODY</span>()</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">AYourCharacter</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 移动控制</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">MoveForward</span><span class="params">(<span class="type">float</span> Value)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">MoveRight</span><span class="params">(<span class="type">float</span> Value)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Jump</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 视角控制</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Turn</span><span class="params">(<span class="type">float</span> Value)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">LookUp</span><span class="params">(<span class="type">float</span> Value)</span></span>;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">BeginPlay</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">SetupPlayerInputComponent</span><span class="params">(UInputComponent* PlayerInputComponent)</span> <span class="keyword">override</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Enhanced Input</span></span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditAnywhere, BlueprintReadOnly, Category = Input)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">UInputMappingContext</span>* DefaultMappingContext;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditAnywhere, BlueprintReadOnly, Category = Input)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">UInputAction</span>* JumpAction;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditAnywhere, BlueprintReadOnly, Category = Input)</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">UInputAction</span>* MoveAction;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenwudao.github.io/2026/01/19/hello-world/">
+<p><strong>蓝图集成：</strong></p>
+<ul>
+<li>创建 Character Blueprint 继承自 C++ 类</li>
+<li>设置动画蓝图（Animation Blueprint）</li>
+<li>配置输入映射（Input Mapping Context）</li>
+</ul>
+<h3 id="5-2-NPC-交互系统"><a href="#5-2-NPC-交互系统" class="headerlink" title="5.2 NPC 交互系统"></a>5.2 NPC 交互系统</h3><p><strong>对话系统：</strong></p>
+<ol>
+<li><p><strong>数据结构设计</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DialogueData.h</span></span><br><span class="line"><span class="built_in">USTRUCT</span>(BlueprintType)</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FDialogueNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">GENERATED_BODY</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditAnywhere)</span><br><span class="line">    FText SpeakerName;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditAnywhere)</span><br><span class="line">    FText DialogueText;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditAnywhere)</span><br><span class="line">    TArray&lt;FDialogueNode&gt; Choices;  <span class="comment">// 分支对话</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>AI 对话集成</strong></p>
+<ul>
+<li>集成 Microsoft phi-2 或其他大语言模型</li>
+<li>训练模型使用场景相关信息</li>
+<li>实现对话树和动态响应</li>
+</ul>
+</li>
+<li><p><strong>交互触发</strong></p>
+<ul>
+<li>使用 Overlap 检测（Sphere Collision）</li>
+<li>显示交互提示 UI</li>
+<li>处理玩家输入触发对话</li>
+</ul>
+</li>
+</ol>
+<h3 id="5-3-场景传送系统"><a href="#5-3-场景传送系统" class="headerlink" title="5.3 场景传送系统"></a>5.3 场景传送系统</h3><p><strong>实现步骤：</strong></p>
+<ol>
+<li>在场景中放置传送点（Teleport Actor）</li>
+<li>创建传送蓝图：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TeleportActor.h</span></span><br><span class="line"><span class="built_in">UCLASS</span>()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">YOURPROJECT_API</span> ATeleportActor : <span class="keyword">public</span> AActor</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">GENERATED_BODY</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditAnywhere)</span><br><span class="line">    FVector TargetLocation;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UFUNCTION</span>(BlueprintCallable)</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">TeleportPlayer</span><span class="params">(APawn* Player)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>在 UI 中创建传送菜单</li>
+<li>实现淡入淡出效果（使用 Fade 节点）</li>
+</ol>
+<h3 id="5-4-兴趣点（POI）系统"><a href="#5-4-兴趣点（POI）系统" class="headerlink" title="5.4 兴趣点（POI）系统"></a>5.4 兴趣点（POI）系统</h3><p><strong>实现：</strong></p>
+<ol>
+<li>创建 POI Actor 基类</li>
+<li>为每个兴趣点设置唯一 ID</li>
+<li>实现交互逻辑（查看、使用、对话等）</li>
+<li>在地图上标记 POI 位置</li>
+</ol>
+<h2 id="六、UI-系统开发"><a href="#六、UI-系统开发" class="headerlink" title="六、UI 系统开发"></a>六、UI 系统开发</h2><h3 id="6-1-主界面（UMG）"><a href="#6-1-主界面（UMG）" class="headerlink" title="6.1 主界面（UMG）"></a>6.1 主界面（UMG）</h3><p><strong>创建 Widget Blueprint：</strong></p>
+<ol>
+<li><p><strong>主菜单</strong></p>
+<ul>
+<li>开始游戏按钮</li>
+<li>设置按钮</li>
+<li>退出按钮</li>
+</ul>
+</li>
+<li><p><strong>游戏内 HUD</strong></p>
+<ul>
+<li>小地图</li>
+<li>角色状态信息</li>
+<li>交互提示</li>
+</ul>
+</li>
+<li><p><strong>传送菜单</strong></p>
+<ul>
+<li>场景列表</li>
+<li>传送按钮</li>
+<li>位置预览</li>
+</ul>
+</li>
+<li><p><strong>设置菜单</strong></p>
+<ul>
+<li>图形设置</li>
+<li>音效设置</li>
+<li>控制设置</li>
+</ul>
+</li>
+</ol>
+<p><strong>C++ Widget 类：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MainMenuWidget.h</span></span><br><span class="line"><span class="built_in">UCLASS</span>()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">YOURPROJECT_API</span> UMainMenuWidget : <span class="keyword">public</span> UUserWidget</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">GENERATED_BODY</span>()</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">UFUNCTION</span>(BlueprintCallable)</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnStartGameClicked</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UFUNCTION</span>(BlueprintCallable)</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnSettingsClicked</span><span class="params">()</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UFUNCTION</span>(BlueprintCallable)</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnQuitClicked</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jesse">
-      <meta itemprop="description" content="A blog mainly about my projects and technical notes">
-    </span>
+<h3 id="6-2-地图导航系统（可选）"><a href="#6-2-地图导航系统（可选）" class="headerlink" title="6.2 地图导航系统（可选）"></a>6.2 地图导航系统（可选）</h3><p><strong>实现步骤：</strong></p>
+<ol>
+<li>创建小地图 Widget</li>
+<li>获取玩家当前位置</li>
+<li>将世界坐标转换为 UI 坐标</li>
+<li>绘制玩家位置和 POI 标记</li>
+<li>实现地图缩放功能</li>
+</ol>
+<h2 id="七、物理系统集成"><a href="#七、物理系统集成" class="headerlink" title="七、物理系统集成"></a>七、物理系统集成</h2><h3 id="7-1-碰撞检测"><a href="#7-1-碰撞检测" class="headerlink" title="7.1 碰撞检测"></a>7.1 碰撞检测</h3><p><strong>设置碰撞：</strong></p>
+<ol>
+<li><p>为静态网格体设置碰撞体</p>
+<ul>
+<li>自动生成碰撞（Auto Convex Collision）</li>
+<li>手动创建简单碰撞体（Box、Sphere、Capsule）</li>
+<li>使用复杂碰撞（Complex Collision，性能开销大）</li>
+</ul>
+</li>
+<li><p>在 C++ 中处理碰撞事件：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UFUNCTION</span>()</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OnOverlapBegin</span><span class="params">(UPrimitiveComponent* OverlappedComp, </span></span></span><br><span class="line"><span class="params"><span class="function">                    AActor* OtherActor, </span></span></span><br><span class="line"><span class="params"><span class="function">                    UPrimitiveComponent* OtherComp, </span></span></span><br><span class="line"><span class="params"><span class="function">                    int32 OtherBodyIndex)</span></span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="7-2-重力与物理约束（可选）"><a href="#7-2-重力与物理约束（可选）" class="headerlink" title="7.2 重力与物理约束（可选）"></a>7.2 重力与物理约束（可选）</h3><p><strong>使用 Bullet3 物理引擎：</strong></p>
+<ol>
+<li>集成 Bullet3 库到 UE 项目</li>
+<li>创建物理约束组件</li>
+<li>实现重力效果：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 Character 类中</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AYourCharacter::ApplyGravity</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">IsOnGround</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">AddMovementInput</span>(FVector::DownVector, GravityStrength);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>常见问题解决：</strong></p>
+<ul>
+<li>“空气墙”问题：检查碰撞体设置，确保碰撞体与模型匹配</li>
+<li>角色穿透地面：调整碰撞检测精度和角色胶囊体大小</li>
+</ul>
+<h2 id="八、动画系统"><a href="#八、动画系统" class="headerlink" title="八、动画系统"></a>八、动画系统</h2><h3 id="8-1-角色动画"><a href="#8-1-角色动画" class="headerlink" title="8.1 角色动画"></a>8.1 角色动画</h3><p><strong>优化动画：</strong></p>
+<ol>
+<li><p><strong>分解动作</strong></p>
+<ul>
+<li>将行走动画分解为更细的片段</li>
+<li>创建过渡动画（Blend Space）</li>
+<li>使用动画蒙太奇（Animation Montage）处理复杂动作</li>
+</ul>
+</li>
+<li><p><strong>动画蓝图</strong></p>
+<ul>
+<li>创建状态机（State Machine）</li>
+<li>设置状态转换条件</li>
+<li>实现流畅的动画过渡</li>
+</ul>
+</li>
+<li><p><strong>IK（反向运动学）</strong></p>
+<ul>
+<li>使用 Foot IK 确保脚部贴合地面</li>
+<li>调整手臂 IK 实现更自然的交互</li>
+</ul>
+</li>
+</ol>
+<h3 id="8-2-NPC-动画"><a href="#8-2-NPC-动画" class="headerlink" title="8.2 NPC 动画"></a>8.2 NPC 动画</h3><ul>
+<li>使用相同的动画系统</li>
+<li>创建 AI 控制器控制 NPC 行为</li>
+<li>实现寻路系统（Navigation Mesh）</li>
+</ul>
+<h2 id="九、测试与优化"><a href="#九、测试与优化" class="headerlink" title="九、测试与优化"></a>九、测试与优化</h2><h3 id="9-1-功能测试清单"><a href="#9-1-功能测试清单" class="headerlink" title="9.1 功能测试清单"></a>9.1 功能测试清单</h3><p><strong>场景建模测试：</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> 模型正确导入，无缺失部分</li>
+<li><input disabled="" type="checkbox"> 材质和纹理正确显示</li>
+<li><input disabled="" type="checkbox"> 坐标系统正确对齐</li>
+<li><input disabled="" type="checkbox"> LOD 正常工作</li>
+</ul>
+<p><strong>交互系统测试：</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> 角色移动流畅</li>
+<li><input disabled="" type="checkbox"> NPC 对话逻辑正确</li>
+<li><input disabled="" type="checkbox"> 传送功能正常</li>
+<li><input disabled="" type="checkbox"> POI 交互响应及时</li>
+</ul>
+<p><strong>物理系统测试：</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> 碰撞检测准确</li>
+<li><input disabled="" type="checkbox"> 无”空气墙”问题</li>
+<li><input disabled="" type="checkbox"> 重力效果正常</li>
+<li><input disabled="" type="checkbox"> 角色不会穿透地面</li>
+</ul>
+<p><strong>UI 系统测试：</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> 所有按钮响应正常</li>
+<li><input disabled="" type="checkbox"> 地图导航准确</li>
+<li><input disabled="" type="checkbox"> 菜单切换流畅</li>
+<li><input disabled="" type="checkbox"> 无延迟或卡顿</li>
+</ul>
+<h3 id="9-2-性能优化"><a href="#9-2-性能优化" class="headerlink" title="9.2 性能优化"></a>9.2 性能优化</h3><p><strong>性能指标：</strong></p>
+<ul>
+<li>目标帧率：60 FPS</li>
+<li>内存使用：控制在合理范围内</li>
+<li>加载时间：优化资源加载</li>
+</ul>
+<p><strong>优化方法：</strong></p>
+<ol>
+<li>使用性能分析工具（UE5 内置的 Stat 命令）</li>
+<li>识别性能瓶颈（CPU&#x2F;GPU）</li>
+<li>优化 Draw Call 数量</li>
+<li>使用对象池管理频繁创建的对象</li>
+<li>异步加载资源</li>
+</ol>
+<h3 id="9-3-常见问题解决"><a href="#9-3-常见问题解决" class="headerlink" title="9.3 常见问题解决"></a>9.3 常见问题解决</h3><p><strong>问题 1：NPC 对话逻辑缺陷</strong></p>
+<ul>
+<li><strong>解决方案：</strong> 集成大语言模型（如 phi-2），使用训练好的对话数据</li>
+</ul>
+<p><strong>问题 2：动画僵硬</strong></p>
+<ul>
+<li><strong>解决方案：</strong> 细化动画片段，优化动画蓝图状态机，添加过渡动画</li>
+</ul>
+<p><strong>问题 3：UI 响应延迟</strong></p>
+<ul>
+<li><strong>解决方案：</strong> 检查事件绑定，使用异步加载，优化 Widget 更新频率</li>
+</ul>
+<p><strong>问题 4：性能问题</strong></p>
+<ul>
+<li><strong>解决方案：</strong> 启用 LOD，优化纹理大小，减少动态光照，使用遮挡剔除</li>
+</ul>
+<h2 id="十、项目打包与部署"><a href="#十、项目打包与部署" class="headerlink" title="十、项目打包与部署"></a>十、项目打包与部署</h2><h3 id="10-1-打包准备"><a href="#10-1-打包准备" class="headerlink" title="10.1 打包准备"></a>10.1 打包准备</h3><ol>
+<li><p><strong>检查资源引用</strong></p>
+<ul>
+<li>确保所有资源路径正确</li>
+<li>移除未使用的资源</li>
+</ul>
+</li>
+<li><p><strong>优化设置</strong></p>
+<ul>
+<li>在 Project Settings 中配置打包选项</li>
+<li>选择适合的压缩级别</li>
+</ul>
+</li>
+<li><p><strong>测试打包版本</strong></p>
+<ul>
+<li>在打包前进行完整测试</li>
+<li>确保所有功能正常</li>
+</ul>
+</li>
+</ol>
+<h3 id="10-2-打包流程"><a href="#10-2-打包流程" class="headerlink" title="10.2 打包流程"></a>10.2 打包流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File → Package Project → Windows (64-bit)</span><br><span class="line">选择输出目录</span><br><span class="line">等待打包完成</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chenwudao's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/01/19/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-01-19 00:27:47" itemprop="dateCreated datePublished" datetime="2026-01-19T00:27:47+08:00">2026-01-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="10-3-部署建议"><a href="#10-3-部署建议" class="headerlink" title="10.3 部署建议"></a>10.3 部署建议</h3><ul>
+<li>提供安装说明文档</li>
+<li>包含系统要求说明</li>
+<li>准备用户手册</li>
+<li>设置反馈渠道</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上十个步骤，您就可以从零开始构建一个完整的元宇宙虚拟交互平台。关键技术链包括：</p>
+<ol>
+<li><strong>数据采集</strong> → 2. <strong>场景重建</strong> → 3. <strong>引擎导入</strong> → 4. <strong>系统开发</strong> → 5. <strong>测试优化</strong></li>
+</ol>
+<p>每个步骤都需要仔细处理，特别是场景重建和性能优化部分。建议在开发过程中持续测试，及时发现问题并解决。</p>
+<p><strong>项目规模参考：</strong></p>
+<ul>
+<li>总代码量：12000+ 行</li>
+<li>主要模块：渲染（3000+）、动画（3000+）、地图加载（3000+）、UI（600+）、物理（900+）</li>
+<li>开发周期：根据场景复杂度，通常需要 2-4 个月</li>
+</ul>
+<p>希望这份教程能帮助您成功复现项目！如有问题，欢迎交流讨论。</p>
 
       
     </div>
@@ -340,7 +676,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">1</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
