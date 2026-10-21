@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"chenwudao.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="A blog mainly about my projects and technical notes">
+  <meta name="description" content="记录个人项目与技术笔记。A blog about my projects and technical notes.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Chenwudao&#39;s blog">
 <meta property="og:url" content="https://chenwudao.github.io/index.html">
 <meta property="og:site_name" content="Chenwudao&#39;s blog">
-<meta property="og:description" content="A blog mainly about my projects and technical notes">
+<meta property="og:description" content="记录个人项目与技术笔记。A blog about my projects and technical notes.">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Jesse">
 <meta property="article:tag" content="blog, project, technical notes">
@@ -98,7 +98,7 @@
       <h1 class="site-title">Chenwudao's blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">Thanks for visiting</p>
+      <p class="site-subtitle" itemprop="description">感谢访问 · Thanks for visiting</p>
   </div>
 
   <div class="site-nav-right">
@@ -154,7 +154,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jesse">
-      <meta itemprop="description" content="A blog mainly about my projects and technical notes">
+      <meta itemprop="description" content="记录个人项目与技术笔记。A blog about my projects and technical notes.">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -163,7 +163,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/01/19/ScutMetaU/" class="post-title-link" itemprop="url">SCUT MetaUniverse(元宇宙虚拟交互平台搭建简易教学)</a>
+            <a href="/2026/01/19/ScutMetaU/" class="post-title-link" itemprop="url">SCUT MetaUniverse：元宇宙虚拟交互平台搭建简易教学</a>
         </h2>
 
         <div class="post-meta">
@@ -188,7 +188,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="SCUT-MetaUniverse-元宇宙虚拟交互平台搭建简易教学"><a href="#SCUT-MetaUniverse-元宇宙虚拟交互平台搭建简易教学" class="headerlink" title="SCUT MetaUniverse - 元宇宙虚拟交互平台搭建简易教学"></a>SCUT MetaUniverse - 元宇宙虚拟交互平台搭建简易教学</h1><p>本文档将详细介绍如何从零开始构建一个完整的元宇宙虚拟交互平台。无论您想复现校园场景还是其他场景，都可以按照以下技术链流程进行操作。</p>
+          <h1 id="SCUT-MetaUniverse-元宇宙虚拟交互平台搭建简易教学"><a href="#SCUT-MetaUniverse-元宇宙虚拟交互平台搭建简易教学" class="headerlink" title="SCUT MetaUniverse：元宇宙虚拟交互平台搭建简易教学"></a>SCUT MetaUniverse：元宇宙虚拟交互平台搭建简易教学</h1><p>本文介绍如何从零开始搭建一套完整的元宇宙虚拟交互平台。无论是复现校园场景，还是搭建其他场景，都可以按以下技术流程操作。</p>
 <h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h3 id="1-1-硬件要求"><a href="#1-1-硬件要求" class="headerlink" title="1.1 硬件要求"></a>1.1 硬件要求</h3><ul>
 <li><strong>操作系统：</strong> Windows 10&#x2F;11（支持 DirectX 12）</li>
 <li><strong>显卡：</strong> NVIDIA RTX 系列（推荐 RTX 3060 及以上，支持实时光线追踪）</li>
@@ -197,19 +197,19 @@
 </ul>
 <h3 id="1-2-软件安装"><a href="#1-2-软件安装" class="headerlink" title="1.2 软件安装"></a>1.2 软件安装</h3><p>按以下顺序安装必要软件：</p>
 <ol>
-<li><p><strong>Visual Studio 2022（要求下载17.4以往的版本，防止版本兼容冲突问题）</strong></p>
+<li><p><strong>Visual Studio 2022（请安装 17.4 及更早版本，以免出现兼容问题）</strong></p>
 <ul>
-<li>安装时勾选”使用 C++ 的游戏开发”工作负载</li>
+<li>安装时勾选“使用 C++ 的游戏开发”工作负载</li>
 <li>确保包含 Windows SDK 和 .NET Framework</li>
 </ul>
 </li>
-<li><p><strong>Unreal Engine 5.2（适用于安装luma ai插件）</strong></p>
+<li><p><strong>Unreal Engine 5.2（用于配合 Luma AI 插件）</strong></p>
 <ul>
 <li>从 Epic Games Launcher 下载安装</li>
 <li>创建账号并关联许可证</li>
 </ul>
 </li>
-<li><p><strong>Git（可选，但是建议）</strong></p>
+<li><p><strong>Git（可选，建议安装）</strong></p>
 <ul>
 <li>用于版本控制和团队协作</li>
 </ul>
@@ -248,7 +248,7 @@
 </ol>
 <p><strong>替代方案：</strong></p>
 <ul>
-<li>如果只有照片，也可以使用多角度照片进行重建</li>
+<li>如果没有视频，也可以改用多角度照片重建</li>
 </ul>
 <h2 id="三、场景重建"><a href="#三、场景重建" class="headerlink" title="三、场景重建"></a>三、场景重建</h2><h3 id="3-1-室外场景重建（RealityCapture）"><a href="#3-1-室外场景重建（RealityCapture）" class="headerlink" title="3.1 室外场景重建（RealityCapture）"></a>3.1 室外场景重建（RealityCapture）</h3><p><strong>软件：</strong> RealityCapture（或 Agisoft Metashape）</p>
 <p><strong>流程：</strong></p>
@@ -271,21 +271,21 @@
 <p><strong>优化建议：</strong></p>
 <ul>
 <li>如果模型过大，可以先进行简化处理</li>
-<li>检查并修复模型中的孔洞和错误面</li>
+<li>检查并修复模型中的孔洞和错误面片</li>
 </ul>
-<h3 id="3-2-室内场景重建（Nerv-算法-Luma-AI）"><a href="#3-2-室内场景重建（Nerv-算法-Luma-AI）" class="headerlink" title="3.2 室内场景重建（Nerv 算法 &#x2F; Luma AI）"></a>3.2 室内场景重建（Nerv 算法 &#x2F; Luma AI）</h3><p><strong>方案一：使用 Luma AI（推荐，简单）</strong></p>
+<h3 id="3-2-室内场景重建（Nerv-算法-Luma-AI）"><a href="#3-2-室内场景重建（Nerv-算法-Luma-AI）" class="headerlink" title="3.2 室内场景重建（NeRF &#x2F; Luma AI）"></a>3.2 室内场景重建（NeRF &#x2F; Luma AI）</h3><p><strong>方案一：使用 Luma AI（推荐，上手更简单）</strong></p>
 <ol>
 <li>访问 Luma AI 网站或使用 UE 插件</li>
 <li>上传室内视频或照片</li>
 <li>等待云端处理完成</li>
 <li>下载生成的 3D 模型（PLY 格式）</li>
 </ol>
-<p><strong>方案二：使用 Nerv 算法（本地处理）</strong></p>
+<p><strong>方案二：使用 NeRF（本地处理）</strong></p>
 <ol>
 <li><p>提取视频关键帧</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 OpenCV 提取关键帧</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 每隔 N 帧提取一帧，或基于场景变化检测</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>使用 Nerv 算法进行神经辐射场重建</p>
+<li><p>使用 NeRF 进行神经辐射场重建</p>
 </li>
 <li><p>转换为网格模型</p>
 </li>
@@ -378,7 +378,7 @@
 <li><p><strong>AI 对话集成</strong></p>
 <ul>
 <li>集成 Microsoft phi-2 或其他大语言模型</li>
-<li>训练模型使用场景相关信息</li>
+<li>使用与场景相关的信息训练模型</li>
 <li>实现对话树和动态响应</li>
 </ul>
 </li>
@@ -386,7 +386,7 @@
 <ul>
 <li>使用 Overlap 检测（Sphere Collision）</li>
 <li>显示交互提示 UI</li>
-<li>处理玩家输入触发对话</li>
+<li>根据玩家输入触发对话</li>
 </ul>
 </li>
 </ol>
@@ -514,7 +514,7 @@
 <p><strong>物理系统测试：</strong></p>
 <ul>
 <li><input disabled="" type="checkbox"> 碰撞检测准确</li>
-<li><input disabled="" type="checkbox"> 无”空气墙”问题</li>
+<li><input disabled="" type="checkbox"> 无“空气墙”问题</li>
 <li><input disabled="" type="checkbox"> 重力效果正常</li>
 <li><input disabled="" type="checkbox"> 角色不会穿透地面</li>
 </ul>
@@ -583,18 +583,15 @@
 <li>准备用户手册</li>
 <li>设置反馈渠道</li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上十个步骤，您就可以从零开始构建一个完整的元宇宙虚拟交互平台。关键技术链包括：</p>
-<ol>
-<li><strong>数据采集</strong> → 2. <strong>场景重建</strong> → 3. <strong>引擎导入</strong> → 4. <strong>系统开发</strong> → 5. <strong>测试优化</strong></li>
-</ol>
-<p>每个步骤都需要仔细处理，特别是场景重建和性能优化部分。建议在开发过程中持续测试，及时发现问题并解决。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>按以上十个步骤，您可以从零开始搭建一套完整的元宇宙虚拟交互平台。关键环节依次是：<strong>数据采集</strong>、<strong>场景重建</strong>、<strong>引擎导入</strong>、<strong>系统开发</strong>与<strong>测试优化</strong>。</p>
+<p>每一步都需要仔细处理，尤其是场景重建和性能优化。建议在开发过程中持续测试，及时发现问题并解决。</p>
 <p><strong>项目规模参考：</strong></p>
 <ul>
 <li>总代码量：12000+ 行</li>
 <li>主要模块：渲染（3000+）、动画（3000+）、地图加载（3000+）、UI（600+）、物理（900+）</li>
 <li>开发周期：根据场景复杂度，通常需要 2-4 个月</li>
 </ul>
-<p>希望这份教程能帮助您成功复现项目！如有问题，欢迎交流讨论。</p>
+<p>希望这份教程能帮助您顺利复现这一项目。如有问题，欢迎交流。</p>
 
       
     </div>
@@ -669,7 +666,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Jesse</p>
-  <div class="site-description" itemprop="description">A blog mainly about my projects and technical notes</div>
+  <div class="site-description" itemprop="description">记录个人项目与技术笔记。A blog about my projects and technical notes.</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
