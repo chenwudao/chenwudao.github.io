@@ -1,0 +1,225 @@
+---
+import { getCollection } from "astro:content";
+import {
+  optionalProfile,
+  otherProjects,
+  profile,
+  projects,
+  tx,
+  ui,
+} from "../data/site";
+import { isoDay, localize, type Locale } from "../lib/locale";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const latest = posts.slice(0, 3);
+
+const facts: { label: string; value: string; href?: string }[] = [
+  { label: tx(locale, ui.affiliationLabel), value: tx(locale, profile.affiliation) },
+  { label: tx(locale, ui.locationLabel), value: tx(locale, profile.location) },
+];
+
+const degree = tx(locale, optionalProfile.degree);
+const department = tx(locale, optionalProfile.department);
+const role = tx(locale, optionalProfile.role);
+const seeking = tx(locale, optionalProfile.seeking);
+if (degree) facts.push({ label: tx(locale, ui.degreeLabel), value: degree });
+if (department) facts.push({ label: tx(locale, ui.departmentLabel), value: department });
+if (optionalProfile.years.trim()) {
+  facts.push({ label: tx(locale, ui.yearsLabel), value: optionalProfile.years.trim() });
+}
+if (role) facts.push({ label: tx(locale, ui.roleLabel), value: role });
+if (profile.hireable) facts.push({ label: tx(locale, ui.statusLabel), value: tx(locale, ui.open) });
+if (seeking) facts.push({ label: tx(locale, ui.seekingLabel), value: seeking });
+
+const extraLinks = [
+  optionalProfile.cvUrl.trim() ? { href: optionalProfile.cvUrl.trim(), label: tx(locale, ui.cv) } : null,
+  optionalProfile.scholar.trim() ? { href: optionalProfile.scholar.trim(), label: "Google Scholar" } : null,
+  optionalProfile.linkedin.trim() ? { href: optionalProfile.linkedin.trim(), label: "LinkedIn" } : null,
+  optionalProfile.website.trim() ? { href: optionalProfile.website.trim(), label: tx(locale, ui.website) } : null,
+].filter((item): item is { href: string; label: string } => item !== null);
+---
+
+<div class="shell">
+  <section class="hero" id="intro" aria-labelledby="intro-title">
+    <div>
+      <p class="kicker">{tx(locale, profile.location)} · {tx(locale, profile.affiliation)}</p>
+      <h1 id="intro-title">{profile.name}</h1>
+      {profile.nameZh.trim() && <p class="name-zh" lang="zh-CN">{profile.nameZh.trim()}</p>}
+      <p class="lede">{tx(locale, profile.intro)}</p>
+      <blockquote class="bio-quote" cite={profile.githubUrl}>
+        <p>{profile.bioQuote}</p>
+      </blockquote>
+      {profile.hireable && (
+        <p class="status"><span class="dot" aria-hidden="true"></span>{tx(locale, ui.open)}</p>
+      )}
+      <ul class="hero-links">
+        <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+        <li>
+          <a href={profile.githubUrl} rel="me noopener" target="_blank">
+            GitHub
+            <span class="sr-only">@{profile.githubUser}, {tx(locale, ui.newTab)}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <figure class="portrait">
+      <img
+        src={profile.avatar}
+        width="460"
+        height="460"
+        alt={tx(locale, ui.avatarAlt)}
+      />
+      <figcaption class="caption">{tx(locale, ui.avatarCaption)} · @{profile.githubUser}</figcaption>
+    </figure>
+  </section>
+
+  <section class="band" id="research" aria-labelledby="research-title">
+    <p class="section-kicker">01</p>
+    <h2 id="research-title">{tx(locale, ui.researchTitle)}</h2>
+    <p class="section-lead">{tx(locale, ui.researchLead)}</p>
+    <ol class="interests">
+      {
+        profile.interests.map((item) => (
+          <li>
+            <span class="abbr">{item.abbr}</span>
+            <span class="interest-title">{tx(locale, item.title)}</span>
+            <p>{tx(locale, item.text)}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="band" id="affiliation" aria-labelledby="affiliation-title">
+    <p class="section-kicker">02</p>
+    <h2 id="affiliation-title">{tx(locale, ui.affiliationTitle)}</h2>
+    <dl class="facts">
+      {
+        facts.map((fact) => (
+          <div>
+            <dt>{fact.label}</dt>
+            <dd>{fact.href ? <a href={fact.href}>{fact.value}</a> : fact.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    {
+      extraLinks.length > 0 && (
+        <ul class="hero-links">
+          {extraLinks.map((link) => (
+            <li>
+              <a href={link.href} rel="noopener" target={link.href.startsWith("http") ? "_blank" : undefined}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+
+  <section class="band" id="projects" aria-labelledby="projects-title">
+    <p class="section-kicker">03</p>
+    <h2 id="projects-title">{tx(locale, ui.projectsTitle)}</h2>
+    <p class="section-lead">{tx(locale, ui.projectsLead)}</p>
+    <ol class="catalog">
+      {
+        projects.map((project, index) => (
+          <li class="project">
+            <span class="project-index">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>
+                <a href={project.url} rel="noopener" target="_blank">
+                  {project.name}
+                  <span class="sr-only">, {tx(locale, ui.newTab)}</span>
+                </a>
+              </h3>
+              <p class="repo-id">{project.repo}</p>
+              <p>{tx(locale, project.blurb)}</p>
+              {project.caution && <p class="caution">{tx(locale, project.caution)}</p>}
+              <ul class="tags">
+                {project.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+              <p class="project-links">
+                <a href={project.url} rel="noopener" target="_blank">
+                  {tx(locale, ui.repository)}
+                  <span class="sr-only">, {tx(locale, ui.newTab)}</span>
+                </a>
+                {project.note && (
+                  <a href={localize(project.note, locale)}>{tx(locale, ui.tutorial)}</a>
+                )}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="band" id="also" aria-labelledby="also-title">
+    <h2 id="also-title">{tx(locale, ui.alsoTitle)}</h2>
+    <ul class="also">
+      {
+        otherProjects.map((project) => (
+          <li>
+            <a class="also-name" href={project.url} rel="noopener" target="_blank">
+              {project.name}
+              <span class="sr-only">, {tx(locale, ui.newTab)}</span>
+            </a>
+            <p>{tx(locale, project.blurb)}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="band" id="notes" aria-labelledby="notes-title">
+    <p class="section-kicker">04</p>
+    <h2 id="notes-title">{tx(locale, ui.notesTitle)}</h2>
+    <p class="section-lead">{tx(locale, ui.notesLead)}</p>
+    {
+      latest.length === 0 ? (
+        <p>{tx(locale, ui.emptyBlog)}</p>
+      ) : (
+        <ol class="note-list">
+          {latest.map((post) => (
+            <li>
+              <p class="date">
+                <time datetime={post.data.pubDate.toISOString()}>{isoDay(post.data.pubDate)}</time>
+              </p>
+              <div>
+                <h3 class="note-title">
+                  <a href={localize(`/blog/${post.id}/`, locale)}>{post.data.title}</a>
+                </h3>
+                <p class="note-excerpt">{post.data.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+    <p class="project-links"><a href={localize("/blog/", locale)}>{tx(locale, ui.notesMore)}</a></p>
+  </section>
+
+  <section class="band" id="contact" aria-labelledby="contact-title">
+    <p class="section-kicker">05</p>
+    <h2 id="contact-title">{tx(locale, ui.contactTitle)}</h2>
+    <p class="section-lead">{tx(locale, ui.contactLead)}</p>
+    <p class="contact-mail"><a href={`mailto:${profile.email}`}>{profile.email}</a></p>
+    <p class="project-links">
+      <a href={profile.githubUrl} rel="me noopener" target="_blank">
+        github.com/{profile.githubUser}
+        <span class="sr-only">, {tx(locale, ui.newTab)}</span>
+      </a>
+    </p>
+  </section>
+</div>

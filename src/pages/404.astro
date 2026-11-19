@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import { ui, tx } from "../data/site";
+import { localize } from "../lib/locale";
+---
+
+<Base
+  locale="zh"
+  title={tx("zh", ui.notFoundTitle)}
+  description={tx("zh", ui.notFoundBody)}
+  path="/"
+  index={false}
+>
+  <div class="shell not-found">
+    <h1>{tx("zh", ui.notFoundTitle)}</h1>
+    <p>{tx("zh", ui.notFoundBody)}</p>
+    <p lang="en">{tx("en", ui.notFoundTitle)}. {tx("en", ui.notFoundBody)}</p>
+    <p class="not-found-links">
+      <a href={localize("/", "zh")}>{tx("zh", ui.home)}</a>
+      <a href={localize("/blog/", "zh")}>{tx("zh", ui.blogTitle)}</a>
+      <a href={localize("/", "en")} lang="en">{tx("en", ui.home)}</a>
+    </p>
+  </div>
+</Base>
