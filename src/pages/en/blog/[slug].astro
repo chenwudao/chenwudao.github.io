@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import PostView from "../../../components/PostView.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+---
+
+<Base
+  locale="en"
+  title={post.data.title}
+  description={post.data.description}
+  path={`/blog/${post.id}/`}
+>
+  <PostView locale="en" post={post} headings={headings}>
+    <Content />
+  </PostView>
+</Base>

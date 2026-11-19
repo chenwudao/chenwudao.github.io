@@ -1,0 +1,43 @@
+---
+import { nav, profile, ui, tx } from "../data/site";
+import { localize, localizeHref, stripLocale, type Locale } from "../lib/locale";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const bare = stripLocale(Astro.url.pathname);
+const home = localize("/", locale);
+const zhHref = localize(bare, "zh");
+const enHref = localize(bare, "en");
+
+function current(href: string): "page" | undefined {
+  if (href === "/#intro" && bare === "/") return "page";
+  if (href === "/blog/" && (bare === "/blog/" || bare.startsWith("/blog/"))) return "page";
+  return undefined;
+}
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href={home}>{profile.name}</a>
+    <nav class="site-nav" aria-label={tx(locale, ui.nav)}>
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={localizeHref(item.href, locale)} aria-current={current(item.href)}>
+                {tx(locale, item.label)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="lang" role="group" aria-label={tx(locale, ui.language)}>
+      <a href={zhHref} hreflang="zh-CN" lang="zh-CN" data-set-locale="zh" aria-current={locale === "zh" ? "true" : undefined}>中文</a>
+      <a href={enHref} hreflang="en" lang="en" data-set-locale="en" aria-current={locale === "en" ? "true" : undefined}>English</a>
+    </div>
+  </div>
+</header>

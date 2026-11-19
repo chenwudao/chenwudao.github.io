@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { ui, tx } from "../data/site";
+import { isoDay, localize, type Locale } from "../lib/locale";
+
+interface Props {
+  locale: Locale;
+  posts: CollectionEntry<"blog">[];
+}
+
+const { locale, posts } = Astro.props;
+---
+
+<div class="shell">
+  <header class="post-head">
+    <h1>{tx(locale, ui.blogTitle)}</h1>
+    <p class="section-lead">{tx(locale, ui.blogLead)}</p>
+  </header>
+  {
+    posts.length === 0 ? (
+      <p>{tx(locale, ui.emptyBlog)}</p>
+    ) : (
+      <ol class="note-list">
+        {posts.map((post) => (
+          <li>
+            <p class="date">
+              <time datetime={post.data.pubDate.toISOString()}>{isoDay(post.data.pubDate)}</time>
+            </p>
+            <div>
+              <h2 class="note-title">
+                <a href={localize(`/blog/${post.id}/`, locale)}>{post.data.title}</a>
+              </h2>
+              <p class="note-excerpt">{post.data.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</div>

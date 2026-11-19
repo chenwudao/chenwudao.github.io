@@ -1,0 +1,14 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import BlogIndex from "../../components/BlogIndex.astro";
+import { tx, ui } from "../../data/site";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Base locale="zh" title={tx("zh", ui.blogTitle)} description={tx("zh", ui.blogLead)} path="/blog/">
+  <BlogIndex locale="zh" posts={posts} />
+</Base>

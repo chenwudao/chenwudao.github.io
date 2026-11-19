@@ -1,0 +1,75 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { ui, tx } from "../data/site";
+import { isoDay, localize, type Locale } from "../lib/locale";
+
+interface Props {
+  locale: Locale;
+  post: CollectionEntry<"blog">;
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { locale, post, headings } = Astro.props;
+const toc = headings.filter((heading) => heading.depth === 2);
+const updated = post.data.updatedDate;
+const showUpdated = updated !== undefined && isoDay(updated) !== isoDay(post.data.pubDate);
+---
+
+<div class="shell">
+  <header class="post-head">
+    <p class="date">
+      <a href={localize("/blog/", locale)}>{tx(locale, ui.backToBlog)}</a>
+      <span aria-hidden="true"> · </span>
+      {tx(locale, ui.posted)}
+      <time datetime={post.data.pubDate.toISOString()}>{isoDay(post.data.pubDate)}</time>
+      {
+        showUpdated && updated && (
+          <>
+            <span aria-hidden="true"> · </span>
+            {tx(locale, ui.updated)}
+            <time datetime={updated.toISOString()}>{isoDay(updated)}</time>
+          </>
+        )
+      }
+    </p>
+    {locale !== post.data.lang && <p class="lang-note">{tx(locale, ui.writtenIn)}</p>}
+    <p class="post-note">{tx(locale, ui.migrated)}</p>
+    {
+      post.data.originalPath && (
+        <p class="repo-id">
+          {tx(locale, ui.formerPath)} <span>{post.data.originalPath}</span>
+        </p>
+      )
+    }
+    {
+      post.data.repoUrl && (
+        <p class="project-links">
+          <a href={post.data.repoUrl} rel="noopener" target="_blank">
+            {tx(locale, ui.relatedRepo)}
+            {post.data.repoLabel ? `: ${post.data.repoLabel}` : ""}
+            <span class="sr-only">, {tx(locale, ui.newTab)}</span>
+          </a>
+        </p>
+      )
+    }
+  </header>
+  <div class="post-layout">
+    <article class="prose" lang={post.data.lang === "zh" ? "zh-CN" : "en"}>
+      <slot />
+    </article>
+    {
+      toc.length > 0 && (
+        <nav class="toc" aria-label={tx(locale, ui.contents)}>
+          <h2>{tx(locale, ui.contents)}</h2>
+          <ol>
+            {toc.map((heading) => (
+              <li>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )
+    }
+  </div>
+</div>

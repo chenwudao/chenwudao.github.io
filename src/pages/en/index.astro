@@ -1,0 +1,9 @@
+---
+import Base from "../../layouts/Base.astro";
+import Home from "../../components/Home.astro";
+import { tx, profile } from "../../data/site";
+---
+
+<Base locale="en" description={tx("en", profile.intro)} path="/" person>
+  <Home locale="en" />
+</Base>

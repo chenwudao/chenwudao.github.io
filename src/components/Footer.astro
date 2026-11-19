@@ -1,0 +1,23 @@
+---
+import { profile, ui, tx } from "../data/site";
+import type { Locale } from "../lib/locale";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell">
+    <p>© {year} {profile.name}</p>
+    <p>{tx(locale, profile.affiliation)} · {tx(locale, profile.location)}</p>
+    <p><a href="/rss.xml">{tx(locale, ui.rss)}</a></p>
+    <p>
+      <a href={profile.siteRepo} rel="noopener" target="_blank">{tx(locale, ui.source)}</a>
+    </p>
+    <p>{tx(locale, ui.footer)}</p>
+  </div>
+</footer>

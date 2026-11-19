@@ -1,0 +1,144 @@
+---
+import "@fontsource/newsreader/latin-400.css";
+import "@fontsource/newsreader/latin-500.css";
+import "@fontsource/newsreader/latin-400-italic.css";
+import "@fontsource/newsreader/latin-ext-400.css";
+import "@fontsource/newsreader/latin-ext-500.css";
+import "@fontsource/newsreader/latin-ext-400-italic.css";
+import "@fontsource/atkinson-hyperlegible/latin-400.css";
+import "@fontsource/atkinson-hyperlegible/latin-700.css";
+import "@fontsource/atkinson-hyperlegible/latin-ext-400.css";
+import "@fontsource/atkinson-hyperlegible/latin-ext-700.css";
+import "@fontsource/ibm-plex-mono/latin-400.css";
+import "@fontsource/ibm-plex-mono/latin-500.css";
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { profile, ui, tx } from "../data/site";
+import { localize, type Locale } from "../lib/locale";
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  path?: string;
+  person?: boolean;
+  index?: boolean;
+}
+
+const {
+  locale,
+  title,
+  description,
+  path,
+  person = false,
+  index = true,
+} = Astro.props;
+const bare = path ?? "/";
+const pageTitle = title ? `${title} · ${profile.name}` : profile.name;
+const pageDescription = description ?? tx(locale, profile.intro);
+const canonicalPath = localize(bare, locale);
+const canonical = new URL(canonicalPath, Astro.site);
+const zhHref = new URL(localize(bare, "zh"), Astro.site);
+const enHref = new URL(localize(bare, "en"), Astro.site);
+const personJson = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: profile.site,
+  email: profile.email,
+  homeLocation: profile.location.en,
+  affiliation: {
+    "@type": "CollegeOrUniversity",
+    name: profile.affiliation.en,
+  },
+  sameAs: [profile.githubUrl],
+};
+---
+
+<!doctype html>
+<html lang={locale === "zh" ? "zh-CN" : "en"}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (function () {
+        var KEY = "locale";
+        try {
+          var saved = localStorage.getItem(KEY);
+          if (saved !== "zh" && saved !== "en") return;
+          var raw = location.pathname;
+          var leaf = raw.split("/").pop() || "";
+          if (leaf.indexOf(".") !== -1) return;
+          var path = raw.endsWith("/") ? raw : raw + "/";
+          var isEn = path === "/en/" || path.indexOf("/en/") === 0;
+          var bare = isEn ? path.slice(3) || "/" : path;
+          var target = saved === "en" ? (bare === "/" ? "/en/" : "/en" + bare) : bare;
+          if (target !== path && target !== raw) location.replace(target);
+        } catch (error) {
+          /* storage can be blocked; the language links still work */
+        }
+      })();
+    </script>
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    {!index && <meta name="robots" content="noindex" />}
+    {index && <link rel="canonical" href={canonical.href} />}
+    {
+      index && (
+        <>
+          <link rel="alternate" hreflang="zh-CN" href={zhHref.href} />
+          <link rel="alternate" hreflang="en" href={enHref.href} />
+          <link rel="alternate" hreflang="x-default" href={zhHref.href} />
+        </>
+      )
+    }
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${profile.name} RSS`} href="/rss.xml" />
+    <meta name="author" content={profile.name} />
+    <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content={person ? "profile" : "website"} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
+    <meta property="og:image" content={new URL(profile.avatar, Astro.site).href} />
+    <meta property="og:image:alt" content={tx(locale, ui.avatarAlt)} />
+    <meta name="twitter:card" content="summary" />
+    {person && <script type="application/ld+json" set:html={JSON.stringify(personJson)} />}
+  </head>
+  <body>
+    <a class="skip" href="#content">{tx(locale, ui.skip)}</a>
+    <Header locale={locale} />
+    <main id="content">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <script is:inline>
+      (function () {
+        document.addEventListener("click", function (event) {
+          var target = event.target;
+          if (!target || !target.closest) return;
+          var link = target.closest("[data-set-locale]");
+          if (!link) return;
+          var next = link.getAttribute("data-set-locale");
+          if (next !== "zh" && next !== "en") return;
+          try {
+            localStorage.setItem("locale", next);
+          } catch (error) {
+            /* ignore */
+          }
+          if (location.hash && link.href) {
+            var url = new URL(link.href, location.origin);
+            if (!url.hash) {
+              event.preventDefault();
+              url.hash = location.hash;
+              location.href = url.toString();
+            }
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
